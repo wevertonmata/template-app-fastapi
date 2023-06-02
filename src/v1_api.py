@@ -35,17 +35,3 @@ async def health_status():
         dict: dict with api version and api status
     """
     return HealthSchema(api_up=True, api_version="v1")
-
-
-@v1_api.get(
-    "/customer/{entity}",
-    tags=["Main"],
-    response_model=ResponseSchema,
-    status_code=200,
-)
-async def get_data(entity: str):
-    """Retrieve data from redis
-    Returns:
-        ResponseSchema
-    """
-    return ResponseSchema(entity=entity, exists=True, data={})
