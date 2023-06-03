@@ -1,17 +1,12 @@
-# FROM grupoxp.azurecr.io/baseimages:alpine-python3.10-latest
 FROM python:3.10-bullseye
-
 
 # Define variables used by python
 ENV PATH=/opt/python/bin:/driver:/home/app/.local/bin:$PATH
 ENV PYTHONPATH=/app/src/
 ENV PIP_EXTRA_INDEX_URL=''
 
-# Install GCC Deps
+# Upgrade libraries
 RUN apt update && apt upgrade -y
-
-# Install GCC Deps if needed
-# RUN apk update && apk add build-base && apk add bash
 
 # Copy repository content to app
 COPY . /app
@@ -26,7 +21,7 @@ RUN --mount=type=secret,id=pip_extra_index_url PIP_EXTRA_INDEX_URL=`cat /run/sec
 EXPOSE 5000
 
 # Add deafult user and group app
-RUN addgroup -S app && adduser -S app -G app
+RUN useradd -ms /bin/bash app
 USER app
 
 # Execute container with the following command

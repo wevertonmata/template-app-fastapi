@@ -5,11 +5,11 @@ black==21.12b0
 isort==5.10.1
 docformatter==1.4.0
 tomli<2.0.0
+mistune>=2.0.5
 
-mistune==2.0.3
 fastapi==0.92.0
 starlette==0.25.0
 pydantic==1.10.2
+email-validator==2.0.0
 uvicorn==0.20.0
-uvloop==0.17.0
-ddtrace==1.7.5
+
