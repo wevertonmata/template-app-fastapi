@@ -13,8 +13,7 @@ COPY . /app
 WORKDIR /app/src
 
 # Pip dependencies
-RUN --mount=type=secret,id=pip_extra_index_url PIP_EXTRA_INDEX_URL=`cat /run/secrets/pip_extra_index_url` && \
-    pip install pip --upgrade && \
+RUN pip install pip --upgrade && \
     pip install -r /app/requirements.txt --use-deprecated=legacy-resolver
 
 # Expose api serving port
