@@ -1,13 +1,10 @@
-import logging
-from fastapi import FastAPI, Response, status
-from template_app.schemas.models import (
-    HealthSchema,
-    ResponseSchema,
-)
+from fastapi import APIRouter
 
-v1_api = FastAPI()
+from ..schemas.models import HealthSchema
 
-@v1_api.get("/liveness", tags=["Health"])
+health_checks = APIRouter()
+
+@health_checks.get("/liveness", tags=["Health"], include_in_schema=False)
 async def liveness_status():
     """Check API health.
 
@@ -17,17 +14,16 @@ async def liveness_status():
     return "Liveness check completed"
 
 
-@v1_api.get("/readiness", tags=["Health"])
-async def readiness_status():
+@health_checks.get("/ready", tags=["Health"], include_in_schema=False)
+async def ready_status():
     """Check API health.
 
     Returns:
         dict: dict with api version and api status
     """
-    return "Readiness check completed"
+    return "ready check completed"
 
-
-@v1_api.get("/health", tags=["Health"], response_model=HealthSchema)
+@health_checks.get("/health", tags=["Health"], response_model=HealthSchema, include_in_schema=False)
 async def health_status():
     """Check API health.
 
@@ -35,3 +31,5 @@ async def health_status():
         dict: dict with api version and api status
     """
     return HealthSchema(api_up=True, api_version="v1")
+
+
