@@ -1,16 +1,6 @@
-from pydantic import BaseModel
-
+# https://fastapi.tiangolo.com/tutorial/response-model/
 from enum import Enum
-from typing import Optional
-
-
-"""Models
-URL: https://fastapi.tiangolo.com/tutorial/response-model/
-
-Você pode declarar o tipo usado para a resposta anotando o tipo de retorno da função de operação do caminho.
-
-"""
-
+from pydantic import BaseModel
 class HealthSchema(BaseModel):
     """Health Schema."""
 
@@ -24,6 +14,6 @@ class ResponseSchema(BaseModel):
     data: dict
     
 class ModelName(str, Enum):
-    alexnet = "alexnet"
-    resnet = "resnet"
-    lenet = "lenet"
+    ALEXNET = "alexnet"
+    RESNET = "resnet"
+    LENET = "lenet"
